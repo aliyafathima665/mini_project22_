@@ -1,0 +1,287 @@
+/* === General Page Layout === */
+body {
+  background-color: #f4f6f8;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* === Centered Container === */
+.dashboard-container {
+  background: #ffffff;
+  padding: 50px 70px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+/* === Heading === */
+.dashboard-container h1 {
+  color: #0d47a1;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+/* === Flash and Info === */
+.login-info {
+  color: #444;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+/* === Button Layout === */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* === Buttons === */
+.btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+}
+/* === General Layout === */
+body {
+  background-color: #f4f6f8;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* === Login Card === */
+.login-container {
+  background: #ffffff;
+  padding: 50px 70px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* === Heading === */
+.login-container h1 {
+  color: #0d47a1;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* === Flash Messages === */
+.flash-success {
+  color: green;
+}
+
+.flash-error, .flash-danger {
+  color: red;
+}
+
+/* === Radio Buttons === */
+.radio-group {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0 30px;
+}
+
+.radio-group label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 6px;
+}
+
+/* === Buttons === */
+.btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+}
+/* Login form styles */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Alert messages */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Logout button */
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.user-info {
+    float: right;
+    margin: 10px;
+}
+
+/* Form Sections */
+.form-section {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Table Styles */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.data-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.data-table input,
+.data-table select,
+.data-table textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* Buttons */
+.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 2px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.actions {
+    white-space: nowrap;
+}

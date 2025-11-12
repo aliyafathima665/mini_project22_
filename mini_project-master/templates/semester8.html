@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semester 1 - Student Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+        h1 { text-align: center; color: #222; }
+        table {
+            width: 100%; border-collapse: collapse;
+            margin-top: 20px; background: white;
+            border-radius: 8px; overflow: hidden;
+        }
+        th, td {
+            padding: 12px; text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .btn {
+            background-color: #007bff; color: white;
+            padding: 8px 12px; border: none;
+            border-radius: 6px; cursor: pointer; transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 2px;
+        }
+        .btn:hover { background-color: #0056b3; }
+        .delete-btn { background-color: #dc3545; }
+        .delete-btn:hover { background-color: #b52a36; }
+        .edit-btn { background-color: #28a745; }
+        .edit-btn:hover { background-color: #218838; }
+        .form-container { margin-top: 30px; text-align: center; }
+        input { padding: 8px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
+        .form-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .add-student-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Semester 1 Students</h2>
+
+<!-- Add Student Form -->
+<div class="add-student-form">
+    <h3>Add New Student</h3>
+    <form method="POST" action="{{ url_for('add_student', semester_id=8) }}">
+        <div class="form-row">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Student Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="regno" placeholder="Register Number" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="department" placeholder="Department" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Add Student</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Reg No</th>
+        <th>Department</th>
+        <th>Actions</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.regno }}</td>
+        <td>{{ student.department }}</td>
+        <td>
+            <!-- EDIT BUTTON - This is the important addition -->
+            <a href="{{ url_for('edit_student', semester_id=8, student_id=student.id) }}" class="btn edit-btn">Edit</a>
+            <a href="{{ url_for('delete_student', semester_id=8, student_id=student.id) }}" class="btn delete-btn" 
+               onclick="return confirm('Delete this student?')">Delete</a>
+            <a href="{{ url_for('move_to_passed_out', semester_id=8, student_id=student.id) }}" class="btn" 
+               onclick="return confirm('Move this student to passed out?')">Pass Out</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Navigation -->
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ url_for('semester_dashboard') }}" class="btn">Back to Semesters</a>
+    <a href="{{ url_for('passed_out_students') }}" class="btn">View Passed Out Students</a>
+</div>
+
+</body>
+</html>

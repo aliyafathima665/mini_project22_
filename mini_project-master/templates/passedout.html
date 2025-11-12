@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Passed Out Students</title>
+
+    <!-- Add this to your navigation section -->
+<div class="user-info">
+    {% if session.logged_in %}
+        <span>Welcome, {{ session.username }}</span>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    {% endif %}
+</div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn-back {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Passed Out Students</h1>
+
+<table>
+    <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Marks</th>
+        <th>Performance</th>
+        <th>Skills</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ student.roll_no }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.marks }}</td>
+        <td>{{ student.performance }}</td>
+        <td>{{ student.skills }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="5">No passed-out students yet.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div style="text-align:center;">
+    <a href="/semester_dashboard" class="btn-back">⬅ Back to Dashboard</a>
+</div>
+
+</body>
+</html>

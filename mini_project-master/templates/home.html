@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Student Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome to Student Management System</h1>
+
+        {% for message, category in get_flashed_messages(with_categories=True) %}
+            <p class="flash-{{ category }}">{{ message }}</p>
+        {% endfor %}
+
+        <p class="login-info">Logged in as <strong>{{ role }}</strong></p>
+
+        <div class="button-group">
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+            <a href="{{ url_for('add_faculty') }}" class="btn">Manage Faculties</a>
+            <a href="{{ url_for('semesters') }}" class="btn">View Semesters</a>
+
+        </div>
+    </div>
+</body>
+</html>

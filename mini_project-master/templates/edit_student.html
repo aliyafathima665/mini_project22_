@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student - Semester {{ semester_id }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Edit Student - {{ student.name }}</h1>
+            <div class="user-info">
+                {% if session.logged_in %}
+                    <span>Welcome, {{ session.username }} ({{ session.role }})</span>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="back-nav">
+            <a href="{{ url_for('semester_page', semester_id=semester_id) }}" class="back-btn">← Back to Semester {{ semester_id }}</a>
+        </div>
+
+        <!-- Basic Student Information -->
+        <div class="form-section">
+            <h2>Basic Information</h2>
+            <form method="POST" action="{{ url_for('update_student_basic', semester_id=semester_id, student_id=student.id) }}">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" name="name" value="{{ student.name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Register No:</label>
+                        <input type="text" name="regno" value="{{ student.regno }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Department:</label>
+                        <input type="text" name="department" value="{{ student.department }}" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Update Basic Info</button>
+            </form>
+        </div>
+
+        <!-- Skills & PTM Records Section -->
+        <div class="form-section">
+            <h2>Skills & PTM Records</h2>
+            <form method="POST" action="{{ url_for('update_student_details', semester_id=semester_id, student_id=student.id) }}">
+                <div class="form-group">
+                    <label>Skills:</label>
+                    <textarea name="skills" rows="3" placeholder="Enter student skills (e.g., Programming, Communication, Leadership)">{{ student.skills or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>PTM Records:</label>
+                    <textarea name="ptm_records" rows="3" placeholder="Enter Parent-Teacher Meeting records">{{ student.ptm_records or '' }}</textarea>
+                </div>
+                <button type="submit" class="btn">Update Skills & PTM Records</button>
+            </form>
+        </div>
+
+        <!-- Add New Subject Form -->
+        <div class="form-section">
+            <h2>Add New Subject</h2>
+            <form method="POST" action="{{ url_for('add_subject', semester_id=semester_id, student_id=student.id) }}">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Subject Name:</label>
+                        <input type="text" name="subject_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Marks:</label>
+                        <input type="text" name="marks" placeholder="e.g., 85/100">
+                    </div>
+                    <div class="form-group">
+                        <label>Grade:</label>
+                        <input type="text" name="grade" placeholder="e.g., A">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Performance:</label>
+                    <select name="performance">
+                        <option value="">Select Performance</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Good">Good</option>
+                        <option value="Average">Average</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add Subject</button>
+            </form>
+        </div>
+
+        <!-- Existing Subjects Table -->
+        <div class="table-section">
+            <h2>Subjects & Performance</h2>
+            {% if student.subjects %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Subject Name</th>
+                        <th>Marks</th>
+                        <th>Grade</th>
+                        <th>Performance</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in student.subjects %}
+                    <tr>
+                        <form method="POST" action="{{ url_for('update_subject', semester_id=semester_id, subject_id=subject.id) }}">
+                        <td><input type="text" name="subject_name" value="{{ subject.subject_name }}" required></td>
+                        <td><input type="text" name="marks" value="{{ subject.marks or '' }}"></td>
+                        <td><input type="text" name="grade" value="{{ subject.grade or '' }}"></td>
+                        <td>
+                            <select name="performance">
+                                <option value="">Select</option>
+                                <option value="Excellent" {% if subject.performance == 'Excellent' %}selected{% endif %}>Excellent</option>
+                                <option value="Good" {% if subject.performance == 'Good' %}selected{% endif %}>Good</option>
+                                <option value="Average" {% if subject.performance == 'Average' %}selected{% endif %}>Average</option>
+                                <option value="Poor" {% if subject.performance == 'Poor' %}selected{% endif %}>Poor</option>
+                            </select>
+                        </td>
+                        <td class="actions">
+                            <button type="submit" class="btn-small">Update</button>
+                            <a href="{{ url_for('delete_subject', semester_id=semester_id, subject_id=subject.id) }}" 
+                               class="btn-small btn-danger" 
+                               onclick="return confirm('Delete this subject?')">Delete</a>
+                        </td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No subjects added yet. Add subjects above.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

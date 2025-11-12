@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile: {{ student.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Profile: {{ student.name }}</h1>
+    {% for message, category in get_flashed_messages(with_categories=True) %}
+        <p class="flash-{{ category }}">{{ message }}</p>
+    {% endfor %}
+    <form method="POST">
+        <label>Name:</label> <input type="text" name="name" value="{{ student.name }}" required><br>
+        <label>USN:</label> <input type="text" name="usn" value="{{ student.usn }}" required><br>
+        <label>Semester:</label> <select name="semester" required>
+            {% for sem in range(1, 9) %}
+                <option value="{{ sem }}" {% if student.semester == sem %}selected{% endif %}>{{ sem }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Mobile:</label> <input type="text" name="mobile" value="{{ student.mobile }}"><br>
+        <label>Lives In:</label> <select name="lives_in">
+            <option value="">Select</option>
+            <option value="hostel" {% if student.lives_in == 'hostel' %}selected{% endif %}>Hostel</option>
+            <option value="home" {% if student.lives_in == 'home' %}selected{% endif %}>Home</option>
+            <option value="pg" {% if student.lives_in == 'pg' %}selected{% endif %}>PG</option>
+        </select><br>
+        <label>Address:</label> <textarea name="address">{{ student.address }}</textarea><br>
+        <label>Health Concerns:</label> <textarea name="health_concerns">{{ student.health_concerns }}</textarea><br>
+        <label>Parents Name:</label> <input type="text" name="parents_name" value="{{ student.parents_name }}"><br>
+        <label>Parents Contact:</label> <input type="text" name="parents_contact" value="{{ student.parents_contact }}"><br>
+        {% if session['role'] in ['HOD', 'Admin'] %}
+            <label>Passed Out Year:</label> <input type="number" name="passed_out_year" value="{{ student.passed_out_year }}"><br>
+        {% endif %}
+        <h3>Skills</h3>
+        <ul>
+            {% for skill in skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+        <label>Add Skill:</label> <input type="text" name="new_skill"><br>
+        <h3>PTM Records</h3>
+        <table>
+            <tr><th>Date</th><th>Time</th><th>Guardian</th><th>Discussion</th></tr>
+            {% for record in ptm_records %}
+                <tr>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.time }}</td>
+                    <td>{{ record.guardian }}</td>
+                    <td>{{ record.discussion }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Save</button>
+    </form>
+    <a href="{{ url_for('students', semester=student.semester if student.semester else 0) }}">Back to Students</a>
+</body>
+</html>

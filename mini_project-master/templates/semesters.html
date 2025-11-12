@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semesters Dashboard</title>
+
+    <!-- Add this to your navigation section -->
+<div class="user-info">
+    {% if session.logged_in %}
+        <span>Welcome, {{ session.username }}</span>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    {% endif %}
+</div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h1 {
+            color: #222;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .semester-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .semester-links a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .semester-links a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #b52a36;
+        }
+    </style>
+</head>
+<body>
+    <h1>Semesters Dashboard</h1>
+    <div class="semester-links">
+        <a href="/semester1">Semester 1</a>
+        <a href="/semester2">Semester 2</a>
+        <a href="/semester3">Semester 3</a>
+        <a href="/semester4">Semester 4</a>
+        <a href="/semester5">Semester 5</a>
+        <a href="/semester6">Semester 6</a>
+        <a href="/semester7">Semester 7</a>
+        <a href="/semester8">Semester 8</a>
+        <a href="/passed_out_students">Passed Out Students</a>
+
+
+    </div>
+    <button class="logout-btn">Logout</button>
+</body>
+</html>

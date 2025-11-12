@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Add Student</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="flash-{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <label>Name:</label> <input type="text" name="name" required><br>
+        <label>USN:</label> <input type="text" name="usn" required><br>
+        <label>Semester:</label> <select name="semester" required>
+            {% for sem in range(1, 9) %}<option value="{{ sem }}">{{ sem }}</option>{% endfor %}
+        </select><br>
+        <label>Mobile:</label> <input type="text" name="mobile"><br>
+        <label>Lives In:</label> <select name="lives_in">
+            <option value="">Select</option>
+            <option value="hostel">Hostel</option>
+            <option value="home">Home</option>
+            <option value="pg">PG</option>
+        </select><br>
+        <label>Address:</label> <textarea name="address"></textarea><br>
+        <label>Health Concerns:</label> <textarea name="health_concerns"></textarea><br>
+        <label>Parents Name:</label> <input type="text" name="parents_name"><br>
+        <label>Parents Contact:</label> <input type="text" name="parents_contact"><br>
+        <h3>Initial PTM Record (optional)</h3>
+        <label>Date:</label> <input type="date" name="ptm_date"><br>
+        <label>Time:</label> <input type="time" name="ptm_time"><br>
+        <label>Guardian:</label> <input type="text" name="ptm_guardian"><br>
+        <label>Discussion:</label> <textarea name="ptm_discussion"></textarea><br>
+        <h3>Initial Call Record (optional)</h3>
+        <label>Date:</label> <input type="date" name="call_date"><br>
+        <label>Reason:</label> <textarea name="call_reason"></textarea><br>
+        <h3>Initial Result (optional)</h3>
+        <label>Semester:</label> <input type="number" name="result_sem" min="1" max="8"><br>
+        <label>SGPA:</label> <input type="number" name="sgpa" step="0.01"><br>
+        <label>Backlogs:</label> <input type="number" name="backlogs"><br>
+        <h3>Skills (comma-separated, optional)</h3>
+        <input type="text" name="skills"><br>
+        <h3>Extra-Curricular (comma-separated, optional)</h3>
+        <input type="text" name="extra_curricular"><br>
+        <button type="submit">Add Student</button>
+    </form>
+    <a href="{{ url_for('semesters') }}">Back to Semesters</a>
+</body>
+</html>

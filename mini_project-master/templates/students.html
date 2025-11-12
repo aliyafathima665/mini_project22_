@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students in Semester {{ semester if semester != 0 else 'Passed Out' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Students in {{ 'Passed Out' if semester == 0 else 'Semester ' + semester|string }}</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="flash-{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search by name or USN" value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+    <a href="{{ url_for('add_student') }}"><button>Add Student</button></a>
+    <table>
+        <tr><th>Name</th><th>USN</th><th>Actions</th></tr>
+        {% for student in students %}
+            <tr>
+                <td><a href="{{ url_for('profile', student_id=student.id) }}">{{ student.name }}</a></td>
+                <td>{{ student.usn }}</td>
+                <td>
+                    {% if session['role'] in ['HOD', 'Admin'] %}
+                        <form method="POST" action="{{ url_for('delete_student', student_id=student.id) }}" style="display:inline;">
+                            <button type="submit">Deactivate</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('semesters') }}">Back to Semesters</a>
+</body>
+</html>
